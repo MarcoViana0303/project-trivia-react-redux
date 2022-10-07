@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { userLogin } from '../redux/actions/index';
+import Config from './Config';
 
 const initial = {
   email: '',
@@ -49,6 +50,7 @@ class Login extends Component {
           type="text"
           name="name"
         />
+
         <button
           type="button"
           disabled={ !able }
@@ -58,6 +60,15 @@ class Login extends Component {
           Play
 
         </button>
+
+        <button
+          name="config"
+          type="submit"
+          data-testid="btn-settings"
+        >
+          Configuraçoes
+        </button>
+        <Config />
       </>
     );
   }
