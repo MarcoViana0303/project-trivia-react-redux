@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { userLogin } from '../redux/actions/index';
 import Config from './Config';
 
+
 const initial = {
   email: '',
   name: '',
@@ -35,19 +36,22 @@ class Login extends Component {
     return (
       <>
         <input
-          data-testid="input-player-name"
-          onChange={ this.handleChange }
-          value={ name }
-          type="text"
-          name="name"
-        />
-        <input
           data-testid="input-gravatar-email"
           onChange={ this.handleChange }
           value={ email }
+          placeholder="Email"
           type="email"
           name="email"
         />
+        <input
+          data-testid="input-player-name"
+          onChange={ this.handleChange }
+          value={ name }
+          placeholder="Nome"
+          type="text"
+          name="name"
+        />
+
         <button
           type="button"
           disabled={ !able }
@@ -57,6 +61,7 @@ class Login extends Component {
           Play
 
         </button>
+
 
         <button
           name="config"
