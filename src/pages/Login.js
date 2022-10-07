@@ -14,9 +14,20 @@ class Login extends Component {
 
     this.state = initial;
     this.handleChange = this.handleChange.bind(this);
-    this.sendUser = this.sendUser.bind(this);
-    this.fetchAPI = this.fetchAPI.bind(this);
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidMount() {
+    const fetchAPI = async () => {
+      const response = await fetch('https://opentdb.com/api_token.php?command=request');
+      const data = await response.json();
+      console.log(data);
+      const { token } = data;
+      localStorage.setItem('token', token);
+      return token;
+    };
+
+    fetchAPI();
   }
 
   handleChange({ target }) {
@@ -24,24 +35,9 @@ class Login extends Component {
     this.setState({ [name]: value });
   }
 
-  sendUser = () => {
-    const { startUser } = this.props;
+  handleClick = () => {
+    const { history, startUser } = this.props;
     startUser(this.state);
-  };
-
-  fetchAPI = async () => {
-    const response = await fetch('https://opentdb.com/api_token.php?command=request');
-    console.log(response);
-    const data = await response.json();
-    const { token } = data;
-    localStorage.setItem('token', token);
-    return token;
-  };
-
-  handleClick = async () => {
-    const { history } = this.props;
-    await this.fetchAPI();
-    this.sendUser();
     history.push('/game');
   };
 
@@ -70,10 +66,10 @@ class Login extends Component {
         />
 
         <button
+          data-testid="btn-play"
           type="button"
           disabled={ !able }
-          onClick={ this.handleClick }
-          data-testid="btn-play"
+          onClick={ () => this.handleClick() }
         >
           Play
 
