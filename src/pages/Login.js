@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { userLogin } from '../redux/actions/index';
 import Config from './Config';
 
-
 const initial = {
   email: '',
   name: '',
@@ -61,7 +60,6 @@ class Login extends Component {
           Play
 
         </button>
-
 
         <button
           name="config"
