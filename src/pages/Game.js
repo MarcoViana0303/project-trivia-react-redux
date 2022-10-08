@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 import Perguntas from '../components/Pergunta';
 import { fetchPerguntas } from '../redux/actions';
+import Header from '../components/Header';
 
 class Game extends Component {
   state = {
@@ -36,10 +36,16 @@ class Game extends Component {
   render() {
     const { carregando } = this.state;
     return (
-      <section>
-        { !carregando && <Perguntas /> }
-        {carregando && <h1>Carregando...</h1>}
-      </section>
+
+      <div>
+        <Header />
+        <section>
+          { !carregando && <Perguntas /> }
+          {carregando && <h1>Carregando...</h1>}
+        </section>
+
+      </div>
+
     );
   }
 }
