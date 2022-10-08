@@ -64,7 +64,7 @@ class Perguntas extends Component {
                 <button
                   key={ index }
                   type="button"
-                  data-testid="incorrect-answer"
+                  data-testid={ `wrong-answer-${index}` }
                 >
                   {cur}
                 </button>
