@@ -47,6 +47,6 @@ describe('Testa o componente Login', () => {
       jest.spyOn(global, 'fetch').mockImplementation(async () => ({ json: async () => mockData }));
       renderWithRouterAndRedux(<App />);
       
-      
+      expect(global.fetch).toHaveBeenCalled();
     })
 })
