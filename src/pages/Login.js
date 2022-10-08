@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { userLogin } from '../redux/actions/index';
+import Config from './Config';
 
 const initial = {
   email: '',
@@ -13,7 +14,20 @@ class Login extends Component {
 
     this.state = initial;
     this.handleChange = this.handleChange.bind(this);
-    this.sendUser = this.sendUser.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidMount() {
+    const fetchAPI = async () => {
+      const response = await fetch('https://opentdb.com/api_token.php?command=request');
+      const data = await response.json();
+      console.log(data);
+      const { token } = data;
+      localStorage.setItem('token', token);
+      return token;
+    };
+
+    fetchAPI();
   }
 
   handleChange({ target }) {
@@ -21,9 +35,10 @@ class Login extends Component {
     this.setState({ [name]: value });
   }
 
-  sendUser = () => {
-    const { startUser } = this.props;
+  handleClick = () => {
+    const { history, startUser } = this.props;
     startUser(this.state);
+    history.push('/game');
   };
 
   render() {
@@ -49,15 +64,25 @@ class Login extends Component {
           type="text"
           name="name"
         />
+
         <button
+          data-testid="btn-play"
           type="button"
           disabled={ !able }
-          onClick={ this.sendUser }
-          data-testid="btn-play"
+          onClick={ () => this.handleClick() }
         >
           Play
 
         </button>
+
+        <button
+          name="config"
+          type="submit"
+          data-testid="btn-settings"
+        >
+          Configuraçoes
+        </button>
+        <Config />
       </>
     );
   }
@@ -65,6 +90,9 @@ class Login extends Component {
 
 Login.propTypes = {
   startUser: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
