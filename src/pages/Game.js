@@ -37,17 +37,14 @@ class Game extends Component {
     const { carregando } = this.state;
     return (
 
-       <div>
-      <Header />
-      <section>
-        { !carregando && <Perguntas /> }
-        {carregando && <h1>Carregando...</h1>}
-      </section>
+      <div>
+        <Header />
+        <section>
+          { !carregando && <Perguntas /> }
+          {carregando && <h1>Carregando...</h1>}
+        </section>
 
-     
-       
       </div>
-
 
     );
   }
