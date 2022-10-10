@@ -7,10 +7,14 @@ class Perguntas extends Component {
     idPergunta: 0,
     respostas: [],
     respondido: false,
+    able: false,
+    timer: 30,
+
   };
 
   componentDidMount() {
     this.refactorRespostas();
+    this.setTimer();
   }
 
   refactorRespostas = () => {
@@ -54,9 +58,21 @@ class Perguntas extends Component {
     this.refactorRespostas();
   };
 
+  setTimer = () => {
+    const seconds = 1000;
+    const idCronometro = setInterval(() => {
+      this.setState((state) => ({ timer: state.timer - 1 }));
+      const { timer } = this.state;
+      if (timer === 0) {
+        clearInterval(idCronometro);
+        this.setState({ able: true, timer: 30 });
+      }
+    }, seconds);
+  };
+
   render() {
     const { perguntas: { results } } = this.props;
-    const { idPergunta, respostas, respondido } = this.state;
+    const { idPergunta, respostas, respondido, timer, able } = this.state;
     const perguntaAtual = results[idPergunta];
     return (
       <section>
@@ -79,6 +95,7 @@ class Perguntas extends Component {
                     type="button"
                     data-testid="correct-answer"
                     onClick={ this.answerClick }
+                    disabled={ able }
                     value={ cur }
                   >
                     {cur}
@@ -91,6 +108,7 @@ class Perguntas extends Component {
                   type="button"
                   data-testid={ `wrong-answer-${index}` }
                   onClick={ this.answerClick }
+                  disabled={ able }
                   value={ cur }
                 >
                   {cur}
@@ -109,6 +127,7 @@ class Perguntas extends Component {
               Next
             </button>
           </div>)}
+        <h3>{timer}</h3>
       </section>
     );
   }
