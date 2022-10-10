@@ -9,7 +9,7 @@ class Perguntas extends Component {
     respondido: false,
     able: false,
     timer: 30,
-
+    answerCount: 0,
   };
 
   componentDidMount() {
@@ -52,13 +52,27 @@ class Perguntas extends Component {
     this.setState({ respondido: true });
   };
 
-  handleNext = () => {
-    const { idPergunta } = this.state;
-    const { history } = this.props;
-    this.setState({ idPergunta: (idPergunta + 1) }, () => {
-      this.refactorRespostas();
-    });
+  handleNext = (event) => {
+    const { target: { parentNode: { childNodes } } } = event;
+    const { perguntas: { results }, history } = this.props;
+    const { idPergunta, answerCount } = this.state;
     const perguntaLimite = 4;
+    childNodes.forEach((e) => {
+      if (e.value === results[idPergunta].correct_answer) {
+        e.classList.remove('btn-c');
+      } else {
+        e.classList.remove('btn-w');
+      }
+    });
+    this.setState(
+      {
+        idPergunta: idPergunta + 1,
+        respondido: false,
+        timer: 30,
+        answerCount: answerCount + 1,
+      },
+      () => { this.refactorRespostas(); },
+    );
     if (idPergunta === perguntaLimite) {
       history.push('/feedback');
     }
@@ -123,9 +137,7 @@ class Perguntas extends Component {
               );
             })
           }
-        </div>
-        {respondido && (
-          <div>
+          {respondido && (
             <button
               type="button"
               onClick={ this.handleNext }
@@ -133,7 +145,8 @@ class Perguntas extends Component {
             >
               Next
             </button>
-          </div>)}
+          )}
+        </div>
         <h3>{timer}</h3>
       </section>
     );
