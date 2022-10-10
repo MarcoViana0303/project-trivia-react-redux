@@ -29,6 +29,19 @@ class Perguntas extends Component {
     return array;
   };
 
+  answerClick = (event) => {
+    const { target: { parentNode: { childNodes } } } = event;
+    const { perguntas: { results } } = this.props;
+    const { idPergunta } = this.state;
+    childNodes.forEach((e) => {
+      if (e.value === results[idPergunta].correct_answer) {
+        e.classList.add('btn-c');
+      } else {
+        e.classList.add('btn-w');
+      }
+    });
+  };
+
   render() {
     const { perguntas: { results } } = this.props;
     // eslint-disable-next-line no-unused-vars
@@ -54,6 +67,7 @@ class Perguntas extends Component {
                     key={ index }
                     type="button"
                     data-testid="correct-answer"
+                    onClick={ this.answerClick }
                     value={ cur }
                   >
                     {cur}
@@ -65,6 +79,8 @@ class Perguntas extends Component {
                   key={ index }
                   type="button"
                   data-testid={ `wrong-answer-${index}` }
+                  onClick={ this.answerClick }
+                  value={ cur }
                 >
                   {cur}
                 </button>
