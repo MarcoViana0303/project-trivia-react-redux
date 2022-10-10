@@ -6,6 +6,8 @@ class Perguntas extends Component {
   state = {
     idPergunta: '0',
     respostas: [],
+    able: false,
+    timer: 30,
   };
 
   componentDidMount() {
@@ -16,6 +18,7 @@ class Perguntas extends Component {
       ...(results[idPergunta].incorrect_answers)];
     const shuffledArray = this.suffleArray(answerArray);
     this.setState({ respostas: [...shuffledArray] });
+    this.setTimer();
   }
 
   suffleArray = (array) => {
@@ -29,10 +32,22 @@ class Perguntas extends Component {
     return array;
   };
 
+  setTimer = () => {
+    const seconds = 1000;
+    const idCronometro = setInterval(() => {
+      this.setState((state) => ({ timer: state.timer - 1 }));
+      const { timer } = this.state;
+      if (timer === 0) {
+        clearInterval(idCronometro);
+        this.setState({ able: true, timer: 30 });
+      }
+    }, seconds);
+  };
+
   render() {
     const { perguntas: { results } } = this.props;
     // eslint-disable-next-line no-unused-vars
-    const { idPergunta, respostas } = this.state;
+    const { idPergunta, respostas, timer, able } = this.state;
     const perguntaAtual = results[idPergunta];
     return (
       <section>
@@ -55,6 +70,7 @@ class Perguntas extends Component {
                     type="button"
                     data-testid="correct-answer"
                     value={ cur }
+                    disabled={ able }
                   >
                     {cur}
                   </button>
@@ -65,6 +81,7 @@ class Perguntas extends Component {
                   key={ index }
                   type="button"
                   data-testid={ `wrong-answer-${index}` }
+                  disabled={ able }
                 >
                   {cur}
                 </button>
@@ -73,6 +90,7 @@ class Perguntas extends Component {
           }
 
         </div>
+        <h3>{timer}</h3>
       </section>
     );
   }
