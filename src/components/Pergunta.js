@@ -52,10 +52,23 @@ class Perguntas extends Component {
     this.setState({ respondido: true });
   };
 
-  handleNext = () => {
+  handleNext = (event) => {
+    const { target: { parentNode: { childNodes } } } = event;
+    const { perguntas: { results } } = this.props;
+    console.log(childNodes);
     const { idPergunta } = this.state;
-    this.setState({ idPergunta: (idPergunta + 1) });
-    this.refactorRespostas();
+    childNodes.forEach((e) => {
+      if (e.value === results[idPergunta].correct_answer) {
+        e.classList.remove('btn-c');
+      } else {
+        e.classList.remove('btn-w');
+      }
+    });
+    this.setState(
+      {
+        idPergunta: idPergunta + 1, respondido: false, timer: 30 },
+      () => { this.refactorRespostas(); },
+    );
   };
 
   setTimer = () => {
@@ -116,9 +129,7 @@ class Perguntas extends Component {
               );
             })
           }
-        </div>
-        {respondido && (
-          <div>
+          {respondido && (
             <button
               type="button"
               onClick={ this.handleNext }
@@ -126,7 +137,8 @@ class Perguntas extends Component {
             >
               Next
             </button>
-          </div>)}
+          )}
+        </div>
         <h3>{timer}</h3>
       </section>
     );
