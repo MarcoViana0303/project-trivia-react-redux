@@ -5,7 +5,7 @@ import { userLogin } from '../redux/actions/index';
 import Config from './Config';
 
 const initial = {
-  email: '',
+  gravatarEmail: '',
   name: '',
 };
 class Login extends Component {
@@ -42,19 +42,19 @@ class Login extends Component {
   };
 
   render() {
-    const { email, name } = this.state;
+    const { gravatarEmail, name } = this.state;
     const stringEmail = /\S+[@]\w+[.]\w+/gm;
     const limitador = 0;
-    const able = (stringEmail.test(email) && name.length > limitador);
+    const able = (stringEmail.test(gravatarEmail) && name.length > limitador);
     return (
       <>
         <input
           data-testid="input-gravatar-email"
           onChange={ this.handleChange }
-          value={ email }
+          value={ gravatarEmail }
           placeholder="Email"
           type="email"
-          name="email"
+          name="gravatarEmail"
         />
         <input
           data-testid="input-player-name"

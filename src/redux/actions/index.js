@@ -11,3 +11,5 @@ export const fetchPerguntas = () => (dispatch) => {
     .then((response) => response.json())
     .then((data) => dispatch(perguntas(data)));
 };
+
+// Actions para a chave Player
