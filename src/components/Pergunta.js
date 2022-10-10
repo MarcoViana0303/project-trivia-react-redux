@@ -9,6 +9,7 @@ class Perguntas extends Component {
     respondido: false,
     able: false,
     timer: 30,
+
   };
 
   componentDidMount() {
@@ -72,7 +73,6 @@ class Perguntas extends Component {
   render() {
     const { perguntas: { results } } = this.props;
     const { idPergunta, respostas, respondido, timer, able } = this.state;
-    const perguntaAtual = results[idPergunta];
     return (
       <section>
         <div>
