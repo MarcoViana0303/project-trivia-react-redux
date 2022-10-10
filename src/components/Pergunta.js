@@ -55,8 +55,9 @@ class Perguntas extends Component {
   handleNext = () => {
     const { idPergunta } = this.state;
     const { history } = this.props;
-    this.setState({ idPergunta: (idPergunta + 1) });
-    this.refactorRespostas();
+    this.setState({ idPergunta: (idPergunta + 1) }, () => {
+      this.refactorRespostas();
+    });
     const perguntaLimite = 4;
     if (idPergunta === perguntaLimite) {
       history.push('/feedback');
@@ -94,6 +95,7 @@ class Perguntas extends Component {
           {
             respostas.map((cur, index) => {
               if (cur === perguntaAtual.correct_answer) {
+                console.log(perguntaAtual.correct_answer);
                 return (
                   <button
                     key={ index }
