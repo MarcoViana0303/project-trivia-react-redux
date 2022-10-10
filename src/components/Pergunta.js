@@ -34,7 +34,17 @@ class Perguntas extends Component {
     return array;
   };
 
-  handleButton = () => {
+  answerClick = (event) => {
+    const { target: { parentNode: { childNodes } } } = event;
+    const { perguntas: { results } } = this.props;
+    const { idPergunta } = this.state;
+    childNodes.forEach((e) => {
+      if (e.value === results[idPergunta].correct_answer) {
+        e.classList.add('btn-c');
+      } else {
+        e.classList.add('btn-w');
+      }
+    });
     this.setState({ respondido: true });
   };
 
@@ -68,8 +78,8 @@ class Perguntas extends Component {
                     key={ index }
                     type="button"
                     data-testid="correct-answer"
+                    onClick={ this.answerClick }
                     value={ cur }
-                    onClick={ this.handleButton }
                   >
                     {cur}
                   </button>
@@ -80,7 +90,8 @@ class Perguntas extends Component {
                   key={ index }
                   type="button"
                   data-testid={ `wrong-answer-${index}` }
-                  onClick={ this.handleButton }
+                  onClick={ this.answerClick }
+                  value={ cur }
                 >
                   {cur}
                 </button>
