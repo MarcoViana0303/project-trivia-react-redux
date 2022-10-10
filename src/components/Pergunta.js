@@ -4,11 +4,16 @@ import PropTypes from 'prop-types';
 
 class Perguntas extends Component {
   state = {
-    idPergunta: '0',
+    idPergunta: 0,
     respostas: [],
+    respondido: false,
   };
 
   componentDidMount() {
+    this.refactorRespostas();
+  }
+
+  refactorRespostas = () => {
     const { perguntas: { results } } = this.props;
     const { idPergunta } = this.state;
     const answerArray = [
@@ -16,7 +21,7 @@ class Perguntas extends Component {
       ...(results[idPergunta].incorrect_answers)];
     const shuffledArray = this.suffleArray(answerArray);
     this.setState({ respostas: [...shuffledArray] });
-  }
+  };
 
   suffleArray = (array) => {
     let index = array.length;
@@ -29,10 +34,19 @@ class Perguntas extends Component {
     return array;
   };
 
+  handleButton = () => {
+    this.setState({ respondido: true });
+  };
+
+  handleNext = () => {
+    const { idPergunta } = this.state;
+    this.setState({ idPergunta: (idPergunta + 1) });
+    this.refactorRespostas();
+  };
+
   render() {
     const { perguntas: { results } } = this.props;
-    // eslint-disable-next-line no-unused-vars
-    const { idPergunta, respostas } = this.state;
+    const { idPergunta, respostas, respondido } = this.state;
     const perguntaAtual = results[idPergunta];
     return (
       <section>
@@ -55,6 +69,7 @@ class Perguntas extends Component {
                     type="button"
                     data-testid="correct-answer"
                     value={ cur }
+                    onClick={ this.handleButton }
                   >
                     {cur}
                   </button>
@@ -65,14 +80,24 @@ class Perguntas extends Component {
                   key={ index }
                   type="button"
                   data-testid={ `wrong-answer-${index}` }
+                  onClick={ this.handleButton }
                 >
                   {cur}
                 </button>
               );
             })
           }
-
         </div>
+        {respondido && (
+          <div>
+            <button
+              type="button"
+              onClick={ this.handleNext }
+              data-testid="btn-next"
+            >
+              Next
+            </button>
+          </div>)}
       </section>
     );
   }
