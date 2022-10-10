@@ -32,6 +32,19 @@ class Perguntas extends Component {
     return array;
   };
 
+  answerClick = (event) => {
+    const { target: { parentNode: { childNodes } } } = event;
+    const { perguntas: { results } } = this.props;
+    const { idPergunta } = this.state;
+    childNodes.forEach((e) => {
+      if (e.value === results[idPergunta].correct_answer) {
+        e.classList.add('btn-c');
+      } else {
+        e.classList.add('btn-w');
+      }
+    });
+  };
+
   setTimer = () => {
     const seconds = 1000;
     const idCronometro = setInterval(() => {
@@ -69,8 +82,9 @@ class Perguntas extends Component {
                     key={ index }
                     type="button"
                     data-testid="correct-answer"
-                    value={ cur }
+                    onClick={ this.answerClick }
                     disabled={ able }
+                    value={ cur }
                   >
                     {cur}
                   </button>
@@ -81,7 +95,9 @@ class Perguntas extends Component {
                   key={ index }
                   type="button"
                   data-testid={ `wrong-answer-${index}` }
+                  onClick={ this.answerClick }
                   disabled={ able }
+                  value={ cur }
                 >
                   {cur}
                 </button>
