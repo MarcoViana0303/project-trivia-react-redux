@@ -35,12 +35,13 @@ class Game extends Component {
 
   render() {
     const { carregando } = this.state;
+    const { history } = this.props;
     return (
 
       <div>
         <Header />
         <section>
-          { !carregando && <Perguntas /> }
+          { !carregando && <Perguntas history={ history } /> }
           {carregando && <h1>Carregando...</h1>}
         </section>
 

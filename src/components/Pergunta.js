@@ -54,8 +54,13 @@ class Perguntas extends Component {
 
   handleNext = () => {
     const { idPergunta } = this.state;
+    const { history } = this.props;
     this.setState({ idPergunta: (idPergunta + 1) });
     this.refactorRespostas();
+    const perguntaLimite = 4;
+    if (idPergunta === perguntaLimite) {
+      history.push('/feedback');
+    }
   };
 
   setTimer = () => {
@@ -139,6 +144,7 @@ const mapStateToProps = (state) => ({
 
 Perguntas.propTypes = {
   perguntas: PropTypes.objectOf(PropTypes.shape).isRequired,
+  history: PropTypes.objectOf(PropTypes.shape).isRequired,
 };
 
 export default connect(mapStateToProps, null)(Perguntas);
