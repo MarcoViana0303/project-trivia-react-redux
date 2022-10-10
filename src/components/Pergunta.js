@@ -9,7 +9,7 @@ class Perguntas extends Component {
     respondido: false,
     able: false,
     timer: 30,
-
+    answerCount: 0,
   };
 
   componentDidMount() {
@@ -56,7 +56,7 @@ class Perguntas extends Component {
     const { target: { parentNode: { childNodes } } } = event;
     const { perguntas: { results } } = this.props;
     console.log(childNodes);
-    const { idPergunta } = this.state;
+    const { idPergunta, answerCount } = this.state;
     childNodes.forEach((e) => {
       if (e.value === results[idPergunta].correct_answer) {
         e.classList.remove('btn-c');
@@ -66,7 +66,11 @@ class Perguntas extends Component {
     });
     this.setState(
       {
-        idPergunta: idPergunta + 1, respondido: false, timer: 30 },
+        idPergunta: idPergunta + 1,
+        respondido: false,
+        timer: 30,
+        answerCount: answerCount + 1,
+      },
       () => { this.refactorRespostas(); },
     );
   };
