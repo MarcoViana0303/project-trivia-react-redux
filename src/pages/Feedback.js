@@ -4,14 +4,12 @@ import md5 from 'crypto-js/md5';
 import { connect } from 'react-redux';
 
 class Feedback extends React.Component {
-  // state = {
-  //   score: 0,
-  // };
-
   render() {
-    const { name, gravatarEmail, score } = this.props;
+    const { name, gravatarEmail, score, assertions } = this.props;
     const emailRefatorado = md5(gravatarEmail).toString();
-    console.log(emailRefatorado);
+    const menor3 = (<h1>Could be better...</h1>);
+    const maiorIgual3 = (<h1>Well Done!</h1>);
+    const numberFeedback = 3;
     return (
       <div>
         <header>
@@ -19,9 +17,16 @@ class Feedback extends React.Component {
           <section data-testid="header-player-name">
             {name}
           </section>
-          <section data-testid="header-score">
-            Resultado:
-            { score }
+          <section>
+            <div>
+              Resultado:
+            </div>
+            <div data-testid="header-score">
+              { score }
+            </div>
+          </section>
+          <section data-testid="feedback-text">
+            {assertions < numberFeedback ? menor3 : maiorIgual3}
           </section>
         </header>
       </div>
@@ -33,6 +38,7 @@ Feedback.propTypes = {
   name: PropTypes.string.isRequired,
   gravatarEmail: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,
+  assertions: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
