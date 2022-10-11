@@ -1,5 +1,6 @@
 export const USER_LOGIN = 'USER_LOGIN';
 export const GET_PERGUNTAS = 'GET_PERGUNTAS';
+export const SCORE = 'SCORE';
 
 export const userLogin = (payload) => ({ type: USER_LOGIN, payload });
 
@@ -11,3 +12,5 @@ export const fetchPerguntas = () => (dispatch) => {
     .then((response) => response.json())
     .then((data) => dispatch(perguntas(data)));
 };
+
+export const score = (payload) => ({ type: SCORE, payload });
