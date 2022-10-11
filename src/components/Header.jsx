@@ -4,16 +4,8 @@ import PropTypes from 'prop-types';
 import md5 from 'crypto-js/md5';
 
 class Header extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      pontos: 0,
-    };
-  }
-
   render() {
-    const { pontos } = this.state;
-    const { name, email } = this.props;
+    const { name, email, score } = this.props;
     const emailRefatorado = md5(email).toString();
     return (
       <header>
@@ -23,7 +15,7 @@ class Header extends React.Component {
         </section>
         <section data-testid="header-score">
           Pontos:
-          { pontos }
+          { score }
         </section>
       </header>
 
@@ -36,9 +28,14 @@ Header.propTypes = {
   email: PropTypes.string.isRequired,
 };
 
+Header.propTypes = {
+  score: PropTypes.number.isRequired,
+};
+
 const mapStateToProps = (state) => ({
-  name: state.user.name,
-  email: state.user.email,
+  name: state.user.player.name,
+  email: state.user.player.email,
+  score: state.user.player.score,
 });
 
 export default connect(mapStateToProps)(Header);
