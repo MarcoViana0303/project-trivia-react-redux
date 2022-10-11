@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { score } from '../redux/actions';
+import { score, acertos } from '../redux/actions';
 
 class Perguntas extends Component {
   state = {
@@ -42,7 +42,7 @@ class Perguntas extends Component {
 
   scoreCal = (resposta) => {
     console.log(resposta);
-    const { perguntas: { results }, scoreDis } = this.props;
+    const { perguntas: { results }, scoreDis, acertoPlus } = this.props;
     const { idPergunta, timer } = this.state;
     const { dificulty } = results[idPergunta];
     const medium = 2;
@@ -55,13 +55,11 @@ class Perguntas extends Component {
       dificuldade = hard;
     }
     const qstScore = param + (timer * dificuldade);
-    console.log(qstScore);
     if (resposta === results[idPergunta].correct_answer) {
       scoreDis(qstScore);
-      console.log('acertou');
+      acertoPlus();
     } else {
       scoreDis(0);
-      console.log('errou');
     }
   };
 
@@ -131,10 +129,25 @@ class Perguntas extends Component {
           <h1 data-testid="question-category">
             {`${perguntaAtual.category}`}
           </h1>
-
           <h1 data-testid="question-text">
             {`${perguntaAtual.question.replace(/(&#039;)/g, '`').replace(/(&quot;)/g, '"')}`}
           </h1>
+          <div>
+            <h1>
+              Category:
+            </h1>
+            <h1 data-testid="question-category">
+              {perguntaAtual.category}
+            </h1>
+          </div>
+          <div>
+            <h1>
+              Question:
+            </h1>
+            <h1 data-testid="question-text">
+              {perguntaAtual.question.replace(/(&#039;)/g, '`').replace(/(&quot;)/g, '"')}
+            </h1>
+          </div>
         </div>
         <div data-testid="answer-options">
           {
@@ -189,12 +202,14 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   scoreDis: (payload) => dispatch(score(payload)),
+  acertoPlus: () => dispatch(acertos()),
 });
 
 Perguntas.propTypes = {
   perguntas: PropTypes.objectOf(PropTypes.shape).isRequired,
   history: PropTypes.objectOf(PropTypes.shape).isRequired,
   scoreDis: PropTypes.func.isRequired,
+  acertoPlus: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Perguntas);
