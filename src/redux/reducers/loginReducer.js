@@ -11,12 +11,18 @@ const USER_INICIAL = {
 };
 
 const user = (state = USER_INICIAL, { payload, type }) => {
-  const nome = state.player.name;
   switch (type) {
   case USER_LOGIN:
-    return {
-      ...state, [nome]: payload,
+  {
+    const tmp = {
+      name: payload.name,
+      assertions: 0,
+      score: 0,
+      gravatarEmail: payload.gravatarEmail,
     };
+    return {
+      ...state, player: tmp,
+    }; }
   default:
     return state;
   }
