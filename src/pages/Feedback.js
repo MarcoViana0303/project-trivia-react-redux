@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import md5 from 'crypto-js/md5';
+import { connect } from 'react-redux';
 
-export default class Feedback extends React.Component {
+class Feedback extends React.Component {
   state = {
     score: 0,
   };
@@ -32,3 +33,9 @@ Feedback.propTypes = {
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  ...state.user,
+});
+
+export default connect(mapStateToProps, null)(Feedback);
