@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 import Perguntas from '../components/Pergunta';
 import { fetchPerguntas } from '../redux/actions';
 import Header from '../components/Header';
@@ -36,13 +35,16 @@ class Game extends Component {
 
   render() {
     const { carregando } = this.state;
+    const { history } = this.props;
     return (
+
       <div>
         <Header />
         <section>
-          { !carregando && <Perguntas /> }
+          { !carregando && <Perguntas history={ history } /> }
           {carregando && <h1>Carregando...</h1>}
         </section>
+
       </div>
 
     );
