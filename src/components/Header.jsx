@@ -8,6 +8,7 @@ class Header extends React.Component {
     const { name, gravatarEmail, score } = this.props;
     const emailRefatorado = md5(gravatarEmail).toString();
     console.log(emailRefatorado);
+    console.log(score);
     return (
       <header>
         <img data-testid="header-profile-picture" src={ `https://www.gravatar.com/avatar/${emailRefatorado}` } alt="" />
@@ -15,7 +16,7 @@ class Header extends React.Component {
           {name}
         </section>
         <section data-testid="header-score">
-          { score.toString() }
+          { score }
         </section>
       </header>
 
