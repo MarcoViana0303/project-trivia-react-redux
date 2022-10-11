@@ -4,14 +4,14 @@ import md5 from 'crypto-js/md5';
 import { connect } from 'react-redux';
 
 class Feedback extends React.Component {
-  state = {
-    score: 0,
-  };
+  // state = {
+  //   score: 0,
+  // };
 
   render() {
-    const { score } = this.state;
-    const { name, email } = this.props;
-    const emailRefatorado = md5(email).toString();
+    const { name, gravatarEmail, score } = this.props;
+    const emailRefatorado = md5(gravatarEmail).toString();
+    console.log(emailRefatorado);
     return (
       <div>
         <header>
@@ -31,11 +31,12 @@ class Feedback extends React.Component {
 
 Feedback.propTypes = {
   name: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
+  gravatarEmail: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  ...state.user,
+  ...state.player,
 });
 
 export default connect(mapStateToProps, null)(Feedback);

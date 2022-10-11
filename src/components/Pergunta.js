@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { score } from '../redux/actions';
+
 class Perguntas extends Component {
   state = {
     idPergunta: 0,
@@ -38,8 +40,33 @@ class Perguntas extends Component {
     return array;
   };
 
+  scoreCal = (resposta) => {
+    console.log(resposta);
+    const { perguntas: { results }, scoreDis } = this.props;
+    const { idPergunta, timer } = this.state;
+    const { dificulty } = results[idPergunta];
+    const medium = 2;
+    const hard = 3;
+    const param = 10;
+    let dificuldade = 1;
+    if (dificulty === 'medium') {
+      dificuldade = medium;
+    } else if (dificulty === 'hard') {
+      dificuldade = hard;
+    }
+    const qstScore = param + (timer * dificuldade);
+    console.log(qstScore);
+    if (resposta === results[idPergunta].correct_answer) {
+      scoreDis(qstScore);
+      console.log('acertou');
+    } else {
+      scoreDis(0);
+      console.log('errou');
+    }
+  };
+
   answerClick = (event) => {
-    const { target: { parentNode: { childNodes } } } = event;
+    const { target: { parentNode: { childNodes }, value } } = event;
     const { perguntas: { results } } = this.props;
     const { idPergunta } = this.state;
     childNodes.forEach((e) => {
@@ -50,6 +77,7 @@ class Perguntas extends Component {
       }
     });
     this.setState({ respondido: true });
+    this.scoreCal(value);
   };
 
   handleNext = (event) => {
@@ -76,14 +104,17 @@ class Perguntas extends Component {
     if (idPergunta === perguntaLimite) {
       history.push('/feedback');
     }
+    this.setTimer();
   };
 
   setTimer = () => {
     const seconds = 1000;
     const idCronometro = setInterval(() => {
       this.setState((state) => ({ timer: state.timer - 1 }));
-      const { timer } = this.state;
-      if (timer === 0) {
+      const { timer, respondido } = this.state;
+      if (respondido === true) {
+        clearInterval(idCronometro);
+      } else if (timer === 0) {
         clearInterval(idCronometro);
         this.setState({ able: true, timer: 30 });
       }
@@ -109,7 +140,6 @@ class Perguntas extends Component {
           {
             respostas.map((cur, index) => {
               if (cur === perguntaAtual.correct_answer) {
-                console.log(perguntaAtual.correct_answer);
                 return (
                   <button
                     key={ index }
@@ -157,9 +187,14 @@ const mapStateToProps = (state) => ({
   perguntas: state.perg,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  scoreDis: (payload) => dispatch(score(payload)),
+});
+
 Perguntas.propTypes = {
   perguntas: PropTypes.objectOf(PropTypes.shape).isRequired,
   history: PropTypes.objectOf(PropTypes.shape).isRequired,
+  scoreDis: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, null)(Perguntas);
+export default connect(mapStateToProps, mapDispatchToProps)(Perguntas);

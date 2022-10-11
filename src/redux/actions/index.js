@@ -1,5 +1,6 @@
 export const USER_LOGIN = 'USER_LOGIN';
 export const GET_PERGUNTAS = 'GET_PERGUNTAS';
+export const SCORE = 'SCORE';
 
 export const userLogin = (payload) => ({ type: USER_LOGIN, payload });
 
@@ -12,4 +13,4 @@ export const fetchPerguntas = () => (dispatch) => {
     .then((data) => dispatch(perguntas(data)));
 };
 
-// Actions para a chave Player
+export const score = (payload) => ({ type: SCORE, payload });

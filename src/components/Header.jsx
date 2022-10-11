@@ -5,8 +5,9 @@ import md5 from 'crypto-js/md5';
 
 class Header extends React.Component {
   render() {
-    const { name, email, score } = this.props;
-    const emailRefatorado = md5(email).toString();
+    const { name, gravatarEmail, score } = this.props;
+    const emailRefatorado = md5(gravatarEmail).toString();
+    console.log(emailRefatorado);
     return (
       <header>
         <img data-testid="header-profile-picture" src={ `https://www.gravatar.com/avatar/${emailRefatorado}` } alt="" />
@@ -14,8 +15,7 @@ class Header extends React.Component {
           {name}
         </section>
         <section data-testid="header-score">
-          Pontos:
-          { score }
+          { score.toString() }
         </section>
       </header>
 
@@ -25,7 +25,7 @@ class Header extends React.Component {
 
 Header.propTypes = {
   name: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
+  gravatarEmail: PropTypes.string.isRequired,
 };
 
 Header.propTypes = {
@@ -36,4 +36,4 @@ const mapStateToProps = (state) => ({
   ...state.player,
 });
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, null)(Header);
