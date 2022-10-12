@@ -21,7 +21,8 @@ body {
   border: 1px solid green;
 }
 
-@media (prefers-reduced-motion: no-preference) {
+@media ( prefers-reduced-motion : no-preference ) {
+
   .App-logo {
     animation: shake infinite 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   }
@@ -43,7 +44,8 @@ body {
 }
 
 @keyframes shake {
-  10%,
+
+  10%, 
   90% {
     transform: translate3d(-1px, 0, 0);
   }
@@ -53,13 +55,13 @@ body {
     transform: translate3d(2px, 0, 0);
   }
 
-  30%,
-  50%,
+  30%, 
+  50%, 
   70% {
     transform: translate3d(-4px, 0, 0);
   }
 
-  40%,
+  40%, 
   60% {
     transform: translate3d(4px, 0, 0);
   }
@@ -75,6 +77,7 @@ body {
 
 input {
   border-radius: 5px;
+
   /* font-weight: bold; */
   margin: 2px;
   padding: 6px;
@@ -83,6 +86,7 @@ input {
 
 .btn-login {
   border-radius: 5px;
+
   /* font-weight: bold; */
   margin: 2px;
   padding: 6px;
