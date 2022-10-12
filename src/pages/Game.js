@@ -26,7 +26,6 @@ class Game extends Component {
 
   checkValidation = () => {
     const { req: { response_code: responseCode }, history } = this.props;
-    console.log(responseCode);
     const codeExpirado = 3;
     if (responseCode === codeExpirado) {
       history.push('/');

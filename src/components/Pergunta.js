@@ -41,7 +41,6 @@ class Perguntas extends Component {
   };
 
   scoreCal = (resposta) => {
-    console.log(resposta);
     const { perguntas: { results }, scoreDis, acertoPlus } = this.props;
     const { idPergunta, timer } = this.state;
     const { dificulty } = results[idPergunta];
@@ -96,12 +95,11 @@ class Perguntas extends Component {
         respondido: false,
         timer: 30,
         answerCount: answerCount + 1,
+        able: false,
       },
       () => { this.refactorRespostas(); },
     );
-    if (idPergunta === perguntaLimite) {
-      history.push('/feedback');
-    }
+    if (idPergunta === perguntaLimite) history.push('/feedback');
     this.setTimer();
   };
 
@@ -110,11 +108,12 @@ class Perguntas extends Component {
     const idCronometro = setInterval(() => {
       this.setState((state) => ({ timer: state.timer - 1 }));
       const { timer, respondido } = this.state;
-      if (respondido === true) {
+
+      if (respondido === true) clearInterval(idCronometro);
+
+      if (timer === 1) {
+        this.setState({ respondido: true, able: true });
         clearInterval(idCronometro);
-      } else if (timer === 0) {
-        clearInterval(idCronometro);
-        this.setState({ able: true, timer: 30 });
       }
     }, seconds);
   };
