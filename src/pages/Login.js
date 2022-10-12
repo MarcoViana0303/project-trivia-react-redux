@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { userLogin } from '../redux/actions/index';
+import logo from '../trivia.png';
 import Config from './Config';
 
 const initial = {
@@ -47,7 +48,8 @@ class Login extends Component {
     const limitador = 0;
     const able = (stringEmail.test(gravatarEmail) && name.length > limitador);
     return (
-      <>
+      <header className="App-header">
+        <img src={ logo } className="App-logo" alt="logo" />
         <input
           data-testid="input-gravatar-email"
           onChange={ this.handleChange }
@@ -67,6 +69,7 @@ class Login extends Component {
 
         <button
           data-testid="btn-play"
+          className="btn-login"
           type="button"
           disabled={ !able }
           onClick={ () => this.handleClick() }
@@ -78,12 +81,13 @@ class Login extends Component {
         <button
           name="config"
           type="submit"
+          className="btn-login"
           data-testid="btn-settings"
         >
           Configuraçoes
         </button>
         <Config />
-      </>
+      </header>
     );
   }
 }

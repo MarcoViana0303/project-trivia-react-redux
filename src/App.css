@@ -69,3 +69,18 @@ body {
 .btn-w {
   border: 3px solid red;
 }
+
+input {
+  border-radius: 5px;
+  font-weight: bold;
+  margin: 2px;
+  padding: 6px;
+  text-align: center;
+}
+
+.btn-login {
+  border-radius: 5px;
+  font-weight: bold;
+  margin: 2px;
+  padding: 6px;
+}
