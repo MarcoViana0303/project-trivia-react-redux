@@ -1,4 +1,4 @@
-import { USER_LOGIN, SCORE, ACERTOS } from '../actions';
+import { USER_LOGIN, SCORE, ACERTOS, PLAY_AGAIN } from '../actions';
 
 const USER_INICIAL = {
   name: '',
@@ -25,6 +25,8 @@ const player = (state = USER_INICIAL, { payload, type }) => {
       ...state,
       assertions: state.assertions + 1,
     };
+  case PLAY_AGAIN:
+    return USER_INICIAL;
   default:
     return state;
   }
