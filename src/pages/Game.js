@@ -38,8 +38,8 @@ class Game extends Component {
     return (
 
       <div>
-        <Header />
-        <section>
+        <section className="gamepage">
+          <Header />
           { !carregando && <Perguntas history={ history } /> }
           {carregando && <h1>Carregando...</h1>}
         </section>

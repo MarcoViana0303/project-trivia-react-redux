@@ -123,7 +123,7 @@ class Perguntas extends Component {
     const { idPergunta, respostas, respondido, timer, able } = this.state;
     const perguntaAtual = results[idPergunta];
     return (
-      <section>
+      <section className="answerPage">
         <div>
           <h1 data-testid="question-category">
             {`${perguntaAtual.category}`}
@@ -132,7 +132,7 @@ class Perguntas extends Component {
             {`${perguntaAtual.question.replace(/(&#039;)/g, '`').replace(/(&quot;)/g, '"')}`}
           </h1>
         </div>
-        <div data-testid="answer-options">
+        <div className="perguntas-next" data-testid="answer-options">
           {
             respostas.map((cur, index) => {
               if (cur === perguntaAtual.correct_answer) {
@@ -140,6 +140,7 @@ class Perguntas extends Component {
                   <button
                     key={ index }
                     type="button"
+                    className="btn-answer"
                     data-testid="correct-answer"
                     onClick={ this.answerClick }
                     disabled={ able }
@@ -153,6 +154,7 @@ class Perguntas extends Component {
                 <button
                   key={ index }
                   type="button"
+                  className="btn-answer"
                   data-testid={ `wrong-answer-${index}` }
                   onClick={ this.answerClick }
                   disabled={ able }
@@ -166,6 +168,7 @@ class Perguntas extends Component {
           {respondido && (
             <button
               type="button"
+              className="btn-answer"
               onClick={ this.handleNext }
               data-testid="btn-next"
             >
