@@ -22,9 +22,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+
 .vscode
 
 cypress/screenshots/
 cypress/videos/
 cypress/reports/
-.stylelintrc.json
