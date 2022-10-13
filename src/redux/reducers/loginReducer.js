@@ -26,7 +26,7 @@ const player = (state = USER_INICIAL, { payload, type }) => {
       assertions: state.assertions + 1,
     };
   case PLAY_AGAIN:
-    return USER_INICIAL;
+    return { ...USER_INICIAL };
   default:
     return state;
   }

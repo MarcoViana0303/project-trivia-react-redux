@@ -5,7 +5,7 @@ const PERGUNTAS_INICIAL = {};
 const perg = (state = PERGUNTAS_INICIAL, { type, payload }) => {
   switch (type) {
   case GET_PERGUNTAS:
-    return payload;
+    return { ...payload };
   default:
     return state;
   }

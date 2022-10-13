@@ -71,7 +71,7 @@ class Login extends Component {
           className="btn-login"
           type="button"
           disabled={ !able }
-          onClick={ () => this.handleClick() }
+          onClick={ this.handleClick }
         >
           Play
 

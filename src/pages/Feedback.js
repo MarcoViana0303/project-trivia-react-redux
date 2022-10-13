@@ -6,6 +6,13 @@ import Header from '../components/Header';
 import { playAgain } from '../redux/actions';
 
 class Feedback extends React.Component {
+  componentDidMount() {
+    const ranking = JSON.parse(localStorage.getItem('raking')) || [];
+    const { name, score, gravatarEmail } = this.props;
+    const newRaking = [...ranking, [name, score, gravatarEmail]];
+    localStorage.setItem('raking', JSON.stringify(newRaking));
+  }
+
   handleAgain = () => {
     const { history, play } = this.props;
     play();
@@ -55,6 +62,8 @@ const mapDispatchToProps = (dispatch) => ({
 Feedback.propTypes = {
   assertions: PropTypes.number.isRequired,
   score: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  gravatarEmail: PropTypes.string.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,

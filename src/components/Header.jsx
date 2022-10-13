@@ -9,7 +9,7 @@ class Header extends React.Component {
     const emailRefatorado = md5(gravatarEmail).toString();
     return (
       <header className="headerInfo">
-        <img data-testid="header-profile-picture" className="headeimg" src={ `https://www.gravatar.com/avatar/${emailRefatorado}` } alt="" />
+        <img data-testid="header-profile-picture" className="headeimg" src={ `https://www.gravatar.com/avatar/${emailRefatorado}` } alt="Gravatar img" />
         <section data-testid="header-player-name">
           {name}
         </section>
