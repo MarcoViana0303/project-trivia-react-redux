@@ -6,7 +6,7 @@ import Header from '../components/Header';
 
 class Feedback extends React.Component {
   render() {
-    const { assertions, history } = this.props;
+    const { assertions, history, score } = this.props;
     const numAcertos = 3;
     return (
       <section>
@@ -14,6 +14,8 @@ class Feedback extends React.Component {
         <div data-testid="feedback-text">
           {assertions < numAcertos ? <h1>Could be better...</h1> : <h1>Well Done!</h1>}
         </div>
+        <div data-testid="feedback-total-score">{score}</div>
+        <div data-testid="feedback-total-question">{assertions}</div>
         <button
           type="button"
           data-testid="btn-ranking"
@@ -40,6 +42,7 @@ const mapStateToProps = (state) => ({
 
 Feedback.propTypes = {
   assertions: PropTypes.number.isRequired,
+  score: PropTypes.number.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
