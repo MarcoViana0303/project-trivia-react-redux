@@ -128,7 +128,10 @@ class Perguntas extends Component {
           <h1 data-testid="question-category">
             {`${perguntaAtual.category}`}
           </h1>
-          <h1 data-testid="question-text">
+          <h1
+            data-testid="question-text"
+            className="perguntas-texto"
+          >
             {`${perguntaAtual.question.replace(/(&#039;)/g, '`').replace(/(&quot;)/g, '"')}`}
           </h1>
         </div>
