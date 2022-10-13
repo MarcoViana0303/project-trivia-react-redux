@@ -102,13 +102,10 @@ input {
   background-color: white;
   border-radius: 15px;
   box-shadow: 10px 5px 5px rgba(92, 91, 91, 0.393);
+  color: black;
   height: 70%;
   text-align: center;
   width: 50%;
-}
-
-.perguntas-texto {
-  color: black;
 }
 
 .perguntas-next {
