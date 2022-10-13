@@ -89,7 +89,7 @@ input {
 
 .gamepage, .answerPage {
   align-items: center;
-  background-color: grey;
+  background-color: #282c34;
   display: flex;
   flex-direction: column;
   height: 100vh;
