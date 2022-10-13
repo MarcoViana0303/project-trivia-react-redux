@@ -12,6 +12,7 @@ class Game extends Component {
 
   componentDidMount() {
     const { getPerg } = this.props;
+    console.log('montei');
     getPerg();
   }
 
@@ -19,6 +20,7 @@ class Game extends Component {
     const { req } = this.props;
     const { carregando } = this.state;
     this.checkValidation();
+    console.log('foi');
     if (Object.keys(req).length > 0 && carregando) {
       this.setState({ carregando: false });
     }
@@ -27,6 +29,7 @@ class Game extends Component {
   checkValidation = () => {
     const { req: { response_code: responseCode }, history } = this.props;
     const codeExpirado = 3;
+    console.log('validation');
     if (responseCode === codeExpirado) {
       history.push('/');
     }
