@@ -3,7 +3,7 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux'
 import App from '../App';
-import mockData from './helpers/mockData'
+import {mockData} from './helpers/mockData'
 
 describe('Testa o componente Login', () => {
     test('Verifica o campo email e nome são existentes', () => {
