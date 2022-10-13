@@ -7,14 +7,12 @@ import Header from '../components/Header';
 class Feedback extends React.Component {
   render() {
     const { assertions, history } = this.props;
-    const menos3 = <h1>Could be better...</h1>;
-    const maisQ3 = <h1>Well Done!</h1>;
     const numAcertos = 3;
     return (
       <section>
         <Header />
         <div data-testid="feedback-text">
-          {assertions < numAcertos ? menos3 : maisQ3}
+          {assertions < numAcertos ? <h1>Could be better...</h1> : <h1>Well Done!</h1>}
         </div>
         <button
           type="button"
@@ -37,7 +35,7 @@ class Feedback extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  assertions: state.player.assertions,
+  ...state.player,
 });
 
 Feedback.propTypes = {

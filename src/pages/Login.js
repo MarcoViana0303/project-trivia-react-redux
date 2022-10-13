@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { userLogin } from '../redux/actions/index';
 import logo from '../trivia.png';
-import Config from './Config';
+import Config from '../components/Config';
 
 const initial = {
   gravatarEmail: '',
