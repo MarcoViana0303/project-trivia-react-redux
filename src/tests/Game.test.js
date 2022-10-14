@@ -36,7 +36,6 @@ describe('Verifica os elementos redenrizados na /feedback', () => {
         userEvent.type(screen.getByTestId('input-player-name'),'Leo Capanato')
 
         await waitFor(() => userEvent.click(screen.getByTestId('btn-play')));
-        await waitFor(() => expect(pathname).toBe("/game"));
         await waitFor(() => expect(pathname).toBe("/"));
 
     })
