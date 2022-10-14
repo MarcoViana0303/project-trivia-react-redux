@@ -7,7 +7,7 @@ export default class Config extends React.Component {
         <h1
           data-testid="settings-title"
         >
-          Title
+          {' '}
         </h1>
       </div>
     );
