@@ -43,17 +43,10 @@ class Perguntas extends Component {
   scoreCal = (resposta) => {
     const { perguntas: { results }, scoreDis, acertoPlus } = this.props;
     const { idPergunta, timer } = this.state;
-    const { dificulty } = results[idPergunta];
-    const medium = 2;
-    const hard = 3;
+    const { difficulty } = results[idPergunta];
+    const dificuldad2e = { easy: 1, medium: 2, hard: 3 };
     const param = 10;
-    let dificuldade = 1;
-    if (dificulty === 'medium') {
-      dificuldade = medium;
-    } else if (dificulty === 'hard') {
-      dificuldade = hard;
-    }
-    const qstScore = param + (timer * dificuldade);
+    const qstScore = param + (timer * dificuldad2e[difficulty]);
     if (resposta === results[idPergunta].correct_answer) {
       scoreDis(qstScore);
       acertoPlus();
