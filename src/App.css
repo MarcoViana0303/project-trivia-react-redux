@@ -1,6 +1,8 @@
 body {
   box-sizing: border-box;
+  font-family: Poppins , sans-serif;
   margin: 0;
+  overflow: hidden;
   padding: 0;
 }
 
@@ -60,4 +62,74 @@ body {
   40%, 60% {
     transform: translate3d(4px, 0, 0);
   }
+}
+
+.btn-c {
+  border: 3px solid rgb(6, 240, 15);
+}
+
+.btn-w {
+  border: 3px solid red;
+}
+
+input {
+  border-radius: 5px;
+  font-weight: 700;
+  margin: 2px;
+  padding: 6px;
+  text-align: center;
+}
+
+.btn-login {
+  border-radius: 5px;
+  font-weight: 700;
+  margin: 2px;
+  padding: 6px;
+}
+
+.gamepage, .answerPage {
+  align-items: center;
+  background-color: #282c34;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.answerPage {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 10px 5px 5px rgba(92, 91, 91, 0.393);
+  color: black;
+  height: 70%;
+  text-align: center;
+  width: 50%;
+}
+
+.perguntas-next {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 50%;
+}
+
+.btn-answer {
+  border-radius: 3px;
+  font-size: 13px;
+  font-weight: 700;
+  margin: 2px;
+  padding: 7px;
+}
+
+.headerInfo {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.headeimg {
+  width: 66px;
 }
