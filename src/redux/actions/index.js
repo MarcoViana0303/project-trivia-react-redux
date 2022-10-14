@@ -9,12 +9,10 @@ export const userLogin = (payload) => ({ type: USER_LOGIN, payload });
 const perguntas = (payload) => ({ type: GET_PERGUNTAS, payload });
 
 export const fetchPerguntas = () => (dispatch) => {
-  console.log('start');
   const token = localStorage.getItem('token');
   fetch(`https://opentdb.com/api.php?amount=5&token=${token}`)
     .then((response) => response.json())
-    .then((data) => dispatch(perguntas(data)))
-    .then(() => console.log('finish'));
+    .then((data) => dispatch(perguntas(data)));
 };
 
 export const score = (payload) => ({ type: SCORE, payload });
